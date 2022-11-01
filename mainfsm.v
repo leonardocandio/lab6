@@ -93,52 +93,26 @@ module mainfsm (
 	always @(*)
 		case (state)
 
-/*
-	input wire clk;
-	input wire reset;
-	input wire [1:0] Op;
-	input wire [5:0] Funct;
-	output wire IRWrite;
-	output wire AdrSrc;
-	output wire [1:0] ALUSrcA;
-	output wire [1:0] ALUSrcB;
-	output wire [1:0] ResultSrc;
-	output wire NextPC;
-	output wire RegW;
-	output wire MemW;
-	output wire Branch;
-	output wire ALUOp;
-	*/
-			
-			//0 0 0 0 0 0 10 01 10 0
-			FETCH: controls = 13'b 1 0 0 0 1 0 10 01 10 0;
+			//1 0 0 0 0 0 10 01 10 0
+			FETCH: controls = 13'b1000101001100;
 			//0 0 0 0 1 0 10 01 10 0
 			DECODE: controls = 13'b0001001001100;
 			//0 0 0 0 1 0 10 00 01 0
-			MEMADR: controls= 13'b0000000;
+			MEMADR: controls= 13'b0000101000010;
 			//0 0 0 0 1 0 10 00 00 1
 			EXECUTER: controls = 13'b0000001000001;
 			//0 0 0 0 1 0 10 00 01 1
-			EXECUTEI: controls = 13'b0000000000;
+			EXECUTEI: controls = 13'b0000101000011;
 			//0 1 0 0 1 0 10 10 01 0
-			BRANCH: controls= 13'b01000000;
-			
-			//0 0 0 0 1 0 10 00 01 0 memadr
+			BRANCH: controls= 13'b0100101010010;
 			//0 0 0 0 1 1 00 00 01 0 heredar
-			MEMREAD: controls= 13'b00000100;
-
-			//0 0 0 0 1 0 10 00 01 0 memadr
+			MEMREAD: controls= 13'b0000110000010;
 			//0 0 0 0 1 1 00 00 01 0
-			MEMWRITE: controls= 13'b00100000;
-
-			//0 0 0 0 1 0 10 00 00 1
-			//0 0 0 0 1 0 10 00 01 1
-			//0 0 0 0 1 0 00 00 01 1
-			ALUWB: controls= 13'b00010000;
-
-			//0 0 0 0 1 1 00 00 01 0 MEMREAD
-			//0 0 0 0 1 1 01 01 01 0
-			MEMWB: controls= 13'b00010101;
+			MEMWRITE: controls= 13'b0010110000010;
+			//0 0 0 1 1 0 00 00 01 1
+			ALUWB: controls= 13'b0001100000011;
+			//0 0 0 1 1 1 01 01 01 0
+			MEMWB: controls= 13'b0001110101010;
 			
 			default: controls = 13'bxxxxxxxxxxxxx;
 		endcase

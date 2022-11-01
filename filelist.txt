@@ -8,3 +8,4 @@ mainfsm.v
 mem.v
 mux3.v
 top.v
+flopenr.v
