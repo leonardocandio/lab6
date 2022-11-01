@@ -1,5 +1,5 @@
 module alu ( input [31:0] a,b,
-              input [2:0] ALUControl,
+              input [1:0] ALUControl,
              output reg [31:0] Result, //assign always block
              output wire [3:0] ALUFlags); //explicit wire for assign with {}
   

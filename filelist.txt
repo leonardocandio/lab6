@@ -9,3 +9,8 @@ mem.v
 mux3.v
 top.v
 flopenr.v
+mux2.v
+flopr.v
+extend.v
+regfile.v
+alu.v

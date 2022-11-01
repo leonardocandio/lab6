@@ -70,7 +70,7 @@ module datapath (
     .en(PCWrite),
     .q(PC)
   );
-  mux2 #(4) adrmux(
+  mux2 #(32) adrmux(
     .d0(PC),
     .d1(Result),
     .s(AdrSrc),
@@ -91,7 +91,7 @@ module datapath (
   );
   mux2 #(4) ra1mux(
     .d0(Instr[19:16]),
-    .d1(4'b1111)
+    .d1(4'b1111),
     .s(RegSrc[0]),
     .y(RA1)
   );
@@ -105,8 +105,8 @@ module datapath (
     .Instr(Instr[23:0]),
     .ImmSrc(ImmSrc),
     .ExtImm(ExtImm)
-  )
-  regfile regfile(
+  );
+  regfile rf(
     .clk(clk),
     .ra1(RA1),
     .ra2(RA2),
@@ -129,16 +129,17 @@ module datapath (
     .d(RD2),
     .q(WriteData)
   );
-  mux2 #(4) srcamux(
+  mux3 #(32) srcamux(
     .d0(A),
     .d1(PC),
+    .d2(ALUOut),
     .s(ALUSrcA),
     .y(SrcA)
   );
-  mux3 #(4) srcbmux(
+  mux3 #(32) srcbmux(
     .d0(WriteData),
     .d1(ExtImm),
-    .d2(3'b100),
+    .d2(32'b100),
     .s(ALUSrcB),
     .y(SrcB)
   );
@@ -146,7 +147,7 @@ module datapath (
     .a(SrcA),
     .b(SrcB),
     .ALUControl(ALUControl),
-    .ALUResult(ALUResult),
+    .Result(ALUResult),
     .ALUFlags(ALUFlags)
   );
   flopr #(32) alureg(
@@ -155,7 +156,7 @@ module datapath (
     .d(ALUResult),
     .q(ALUOut)
   );
-  mux3 #(4) resultmux(
+  mux3 #(32) resultmux(
     .d0(ALUOut),
     .d1(Data),
     .d2(ALUResult),
