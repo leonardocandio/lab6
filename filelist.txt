@@ -1,3 +1,4 @@
+multi_tb.v
 arm.v
 condcheck.v
 condlogic.v
