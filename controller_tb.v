@@ -1,6 +1,6 @@
-`timescale 1s/1s
+`timescale 1ns/1ps
 module controller_tb();
-    reg clk;
+  reg clk;
 	reg reset;
 	reg [31:12] Instr;
 	reg [3:0] ALUFlags;
@@ -15,15 +15,15 @@ module controller_tb();
 	wire [1:0] ResultSrc;
 	wire [1:0] ImmSrc;
 	wire [1:0] ALUControl;
-    reg [31:0] vectornum;
-    reg [31:0] errors;
+  reg [31:0] vectornum;
+  reg [31:0] errors;
     
     controller dut(
-                    .clk(clk), 
-                    .reset(reset), 
-                    .Instr(Instr), 
-                    .ALUFlags(ALUFlags), 
-                    .PCWrite(PCWrite), 
+                  .clk(clk), 
+                  .reset(reset), 
+                  .Instr(Instr), 
+                  .ALUFlags(ALUFlags), 
+                  .PCWrite(PCWrite), 
                     .MemWrite(MemWrite), 
                     .RegWrite(RegWrite),
                     .IRWrite(IRWrite),
@@ -37,56 +37,72 @@ module controller_tb();
     
     initial begin
 		reset <= 1;
-		#(9)
-			;
+		#(1);
 		reset <= 0;
 	end
 
     always
         begin
-            clk <= 1;
-		    #(1)
-			;
-		    clk <= 0;
-		    #(1)
-			;
+          clk <= 1;
+          #(1);
+          clk <= 0;
+          #(1);
         end
     
     initial
     
 
-//Banco de prubas
-//ADD R5, R5, R4    	1110 000 0100 0 0101 0101 0000 0000 0100 
-//ADD R2, R0, #10   	1110 001 0100 0 0000 0010 0000 0000 0001 
-//SUB R7, R7, R2    	1110 000 0010 0 0111 0111 0000 0000 0010 
-//SUB R7, R3, #9    	1110 001 0010 0 0011 0111 0000 0000 1001 
-//ORR R4, R7, R2  	    1110 000 1100 0 0111 0100 0000 0000 0010 
-//AND R5, R3, R4  	    1110 000 0000 0 0011 0101 0000 0000 0100 
-//LDR R2, [R0, #96]  	1110 010 1100 1 0000 0010 0000 0110 0000 
-//STR R7, [R3, #84]  	1110 010 1100 0 0011 0111 0000 0101 0100 
-//B END             	1110 101 0000 0 0000 0000 0000 0000 0001  
-//END:
 
-    begin
-        Instr = 20'b11100000100001010101;
-        #10
-        Instr = 20'b11100000010001110111;
-        #10
-        Instr = 20'b11100001100001110100;
-        #10
-        Instr = 20'b11100000000000110101;
-        #10
-        Instr = 20'b11100001100001110100;
-        #10
-        Instr = 20'b11100000000000110101;
-        #10
-        Instr = 20'b11100101100100000010;
-        #10
-        Instr = 20'b11100101100000110111;
-        #10
-        Instr = 20'b11101010000000000000;
-        $finish;
-    end    
+begin
+Instr = 20'b11100000010011110000;
+#(8)
+Instr = 20'b11100010100000000010;
+#(8)
+Instr = 20'b11100010100000000011;
+#(8)
+Instr = 20'b11100010010000110111;
+#(8)
+Instr = 20'b11100001100001110100;
+#(8)
+Instr = 20'b11100000000000110101;
+#(8)
+Instr = 20'b11100000100001010101;
+#(8)
+Instr = 20'b11100000010101011000;
+#(8)
+Instr = 20'b00001010000000000000;
+#(8)
+Instr = 20'b11100000010100111000;
+#(8)
+Instr = 20'b10101010000000000000;
+#(8)
+Instr = 20'b11100010100000000101;
+#(8)
+Instr = 20'b11100000010101111000;
+#(8)
+Instr = 20'b10110010100001010111;
+#(8)
+Instr = 20'b11100000010001110111;
+#(8)
+Instr = 20'b11100101100000110111;
+#(8)
+Instr = 20'b11100101100100000010;
+#(8)
+Instr = 20'b11100000100011111111;
+#(8)
+Instr = 20'b11100010100000000010;
+#(8)
+Instr = 20'b11101010000000000000;
+#(8)
+Instr = 20'b11100010100000000010;
+#(8)
+Instr = 20'b11100010100000000010;
+#(8)
+Instr = 20'b11100101100000000010;
+#(8)
+$finish;
+end
+    
     initial begin
         $dumpfile("arm_control.vcd");
         $dumpvars;

@@ -1,0 +1,7 @@
+controller_tb.v
+mainfsm.v
+controller.v
+condlogic.v
+decode.v
+condcheck.v
+flopenr.v
