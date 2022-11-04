@@ -93,25 +93,16 @@ module mainfsm (
 	always @(*)
 		case (state)
 
-			//1 0 0 0 1 0 10 01 10 0
+			
 			FETCH: controls = 13'b1000101001100;
-			//0 0 0 0 0 0 10 01 10 0
 			DECODE: controls = 13'b0000001001100;
-			//0 0 0 0 0 0 00 00 01 0
 			MEMADR: controls= 13'b0000000000010;
-			//0 0 0 0 0 0 00 00 00 1
 			MEMREAD: controls = 13'b0000010000000;
-			//0 0 0 0 0 0 01 00 01 1
 			MEMWB: controls = 13'b0001000100000;
-			//0 1 0 0 0 0 00 10 01 0
 			MEMWRITE: controls= 13'b0010010000000;
-			//0 0 0 0 0 1 00 00 01 0 heredar
 			EXECUTER: controls= 13'b0000000000001;
-			//0 0 0 0 0 1 00 00 01 0
 			EXECUTEI: controls= 13'b0000000000011;
-			//0 0 0 1 0 0 00 00 01 1
 			ALUWB: controls= 13'b0001000000000;
-			//0 0 0 1 0 1 10 01 01 0
 			BRANCH: controls= 13'b0100001010010;
 			
 			default: controls = 13'bxxxxxxxxxxxxx;
