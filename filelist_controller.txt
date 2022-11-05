@@ -5,3 +5,4 @@ condlogic.v
 decode.v
 condcheck.v
 flopenr.v
+flopr.v
